@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/chip-core/1dof_leg_test/LEG_ROS/devel/setup.sh
