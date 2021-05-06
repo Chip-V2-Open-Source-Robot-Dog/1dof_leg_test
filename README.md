@@ -16,6 +16,14 @@ We will start w/ this 1-DoF system, then redesign the entire leg and make the 3-
 
 This repository contains the code as well as basic mechatronics design for our 1-DoF leg test as well as a bill-of-materials. As this system is very simple electrically, mechanically, and on the control side, most of the documentation will be contained in this README.md file. For other documentation please email chipv2@mit.edu or adim@mit.edu.
 
+## Mechanical Design
+
+## Hardware System
+
+## Software Architechture 
+
+## Bill of Materials
+
 ## License
 
 ###### This repository is licensed under the MIT License, see LICENSE.md for more inforamtion. (MIT License Copyright (c) 2021 Chip V2)
