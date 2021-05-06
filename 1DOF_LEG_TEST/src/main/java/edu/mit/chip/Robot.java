@@ -167,6 +167,11 @@ public class Robot extends TimedRobot {
         //                                                     //
         //=====================================================//
 
+        //NOTE:
+        /*
+        WILL NEED TO IMPLEMENT CURRENT LIMITS SO WE DON'T FRY THE MOTOR SINCE WE ARE NOW OPERATING @ 24V!!!
+        */
+
 
         //SET THE VALUES TO WHAT IS PULLED FROM NETWORK TABLES --> POSITION + SMART MOTION CONTROL!!!
         motor_1.getPIDController().setReference(networking.pullInput("m1_p", 0.0), MotorControlType.POSITION.sparkMaxType); //UPDATE THE MOTOR CONTROL STRUCT ABOVE LATER
