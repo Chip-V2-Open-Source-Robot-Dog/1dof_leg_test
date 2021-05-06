@@ -17,4 +17,4 @@ This repository contains the code as well as basic mechatronics design for our 1
 
 ## License
 
-###### This repository is licensed under the MIT License, see LICENSE.md for more inforamtion. 
+###### This repository is licensed under the MIT License, see LICENSE.md for more inforamtion. (MIT License Copyright (c) 2021 Chip V2)
