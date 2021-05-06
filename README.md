@@ -1,4 +1,4 @@
-# Chip V2+ 1-DoF Leg Test
+# Hoppy Foot - 1-DoF Leg Test
 
 ## Background
 
