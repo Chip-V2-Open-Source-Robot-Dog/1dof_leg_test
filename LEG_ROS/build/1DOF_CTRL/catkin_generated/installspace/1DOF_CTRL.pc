@@ -1,0 +1,8 @@
+prefix=/home/chip-core/1dof_leg_test/LEG_ROS/install
+
+Name: 1DOF_CTRL
+Description: Description of 1DOF_CTRL
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

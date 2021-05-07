@@ -131,6 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/chip-core/1dof_leg_test/LEG_ROS/build/gtest/cmake_install.cmake")
+  include("/home/chip-core/1dof_leg_test/LEG_ROS/build/1DOF_CTRL/cmake_install.cmake")
 
 endif()
 

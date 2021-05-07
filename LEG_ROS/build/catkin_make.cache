@@ -1,2 +1,2 @@
-
+1DOF_CTRL
 -DCATKIN_DEVEL_PREFIX=/home/chip-core/1dof_leg_test/LEG_ROS/devel -DCMAKE_INSTALL_PREFIX=/home/chip-core/1dof_leg_test/LEG_ROS/install -G Unix Makefiles
