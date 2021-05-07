@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- LET's LAUNCH ALL THE CHIP NODES WE NEED -->
+    <!-- launch the RIO comms nodes first -->
+    <node respawn="true" pkg="CHIP_ROS" type="RIO_READ_NODE.py" name="DATA_READ"/>
+    <node respawn="true" pkg="CHIP_ROS" type="RIO_WRITE_NODE.py" name="DATA_WRITE"/>
+    <!-- finally, launch the master -->
+    <node respawn="true" pkg="CHIP_ROS" type="CHIP.py" name="CHIP_MASTER"/>
+    <node respawn="true" pkg="CHIP_ROS" type="tf.py" name="IMU_DATA_PUBLISHER"/>
+    <!-- LET's LAUNCH THIRD PARTY NODES LAST -->
+    <node respawn="true" pkg="joy" type="joy_node" name="JOYSTICK_INPUT"/>
+    <include file="/opt/ros/melodic/share/mavros/launch/apm.launch" />
+    <include file="/opt/ros/melodic/share/realsense2_camera/launch/rs_t265.launch" />
+</launch>
