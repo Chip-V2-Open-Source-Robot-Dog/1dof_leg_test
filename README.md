@@ -9,6 +9,7 @@ In redesigning the chip robot dog platform, we're starting by making a 1-DoF dev
 * Max weight the actuation system can support (we will use variable masses on-top of the leg).
 * A general control and software architechture to be implemented on the Chip V2+ robot in later stages of development. 
 * Accuracy of the current sensor and if we can determine foot contact w/ the ground through the current sensor.
+* Also want to test bezier curve path following for the leg and tuning controllers for smooth motion as this is very important for legged robot systems. 
 
 We will start w/ this 1-DoF system, then redesign the entire leg and make the 3-DoF system functional before finally re-designing the Chip V2 robot to become Chip V2+ and start manufacturing that robot and writing the software for that. We think this approach will allow us to develop a better robotic system by starting from the ground-up.
 
