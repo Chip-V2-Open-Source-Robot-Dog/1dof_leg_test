@@ -30,6 +30,10 @@ This repository contains the code as well as basic mechatronics design for our 1
 MIT Biomimetic Robotics Lab; 
 Professor Sangbae Kim;
 Elijah B. Stranger-Jones;
+MIT 6.141 RSS;
+MIT 2.12 Intro to Robotics;
+MIT 2.14 Feedback Systems;
+MIT 6.131 Power Electronics
 
 ## License
 
