@@ -26,6 +26,9 @@ This repository contains the code as well as basic mechatronics design for our 1
 
 ## Credits
 
+MIT Biomimetic Robotics Lab; 
+Professor Sangbae Kim;
+Elijah B. Stranger-Jones;
 
 ## License
 
