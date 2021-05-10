@@ -24,6 +24,9 @@ This repository contains the code as well as basic mechatronics design for our 1
 
 ## Bill of Materials
 
+## Credits
+
+
 ## License
 
 ###### This repository is licensed under the MIT License, see LICENSE.md for more inforamtion. (MIT License Copyright (c) 2021 Chip V2)
