@@ -69,6 +69,18 @@ def read(data):
     DATA_VECTOR = [t]+[VBUS]+M1_DATA+M2_DATA
     writer.writerow(DATA_VECTOR)
 
+#run the main code
+if __name__=='__main__':
+    pass
+
+
+
+
+
+
+
+
+
 
 
 '''
