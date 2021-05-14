@@ -150,10 +150,45 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void teleopInit() {
-        //SET THE FIRST MOTOR TO A DESIRED VELOCITY
-        motor_1.getPIDController().setReference(networking.pullInput("m1_pd", 0.0), MotorControlType.VELOCITY.sparkMaxType);
-        //VERY SIMPLE TORQUE CONTROLLER FOR THE SECOND MOTOR
-        motor_2.getPIDController().setReference(networking.pullInput("m2_tau", 0.0), MotorControlType.CURRENT.sparkMaxType); //DIVIDE BY KT after INITIAL TESTS
+        //PULL THE CONTROL MODES FOR EACH MOTOR
+        double m1_mode = networking.pullInput("m1_mode", 1.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
+        double m2_mode = networking.pullInput("m2_mode", 1.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
+
+        //now parse the nt inputs for MOTOR 1
+        if (m1_mode == 1.0) {
+            //SET THE FIRST MOTOR TO A DESIRED VOLTAGE, ONLY TO STOP THE MOTOR
+            motor_1.getPIDController().setReference(0.0, MotorControlType.VOLTAGE.sparkMaxType);
+        }
+        if (m1_mode == 2.0) {
+            //SET THE FIRST MOTOR TO A DESIRED CURRENT
+            motor_1.getPIDController().setReference(networking.pullInput("m1_tau", 0.0), MotorControlType.CURRENT.sparkMaxType);
+        }
+        if (m1_mode == 3.0) {
+            //SET THE FIRST MOTOR TO A DESIRED VELOCITY
+            motor_1.getPIDController().setReference(networking.pullInput("m1_pd", 0.0), MotorControlType.VELOCITY.sparkMaxType);
+        }
+        if (m1_mode == 4.0) {
+            //SET THE FIRST MOTOR TO A DESIRED POSITION
+            motor_1.getPIDController().setReference(networking.pullInput("m1_p", 0.0), MotorControlType.POSITION.sparkMaxType);
+        }
+
+        //now parse the nt inputs for MOTOR 2
+        if (m2_mode == 1.0) {
+            //SET THE FIRST MOTOR TO A DESIRED VOLTAGE, ONLY TO STOP THE MOTOR
+            motor_2.getPIDController().setReference(0.0, MotorControlType.VOLTAGE.sparkMaxType);
+        }
+        if (m2_mode == 2.0) {
+            //SET THE FIRST MOTOR TO A DESIRED CURRENT
+            motor_2.getPIDController().setReference(networking.pullInput("m2_tau", 0.0), MotorControlType.CURRENT.sparkMaxType);
+        }
+        if (m2_mode == 3.0) {
+            //SET THE FIRST MOTOR TO A DESIRED VELOCITY
+            motor_2.getPIDController().setReference(networking.pullInput("m2_pd", 0.0), MotorControlType.VELOCITY.sparkMaxType);
+        }
+        if (m2_mode == 4.0) {
+            //SET THE FIRST MOTOR TO A DESIRED POSITION
+            motor_2.getPIDController().setReference(networking.pullInput("m2_p", 0.0), MotorControlType.POSITION.sparkMaxType);
+        }
     }
     
     /**
