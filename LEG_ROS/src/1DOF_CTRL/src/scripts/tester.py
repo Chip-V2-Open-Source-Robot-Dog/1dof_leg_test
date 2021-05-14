@@ -72,7 +72,16 @@ def read(data):
 
 #run the main code
 if __name__=='__main__':
-    pass
+    #SET THE COMMANDED VEL
+    COMMANDED_VELOCITY = 10.0 #RPM
+    #SET THE COMMANDED TORQUE (CURRENT FOR NOW)
+    COMMANDED_TORQUE = 1.0 #A for now (will do Nm later)
+    #COMMANDS
+    C1 = [0.0, COMMANDED_VELOCITY, MODES[3], 0.0, 0.0, 0.0, COMMANDED_TORQUE, MODES[2]]
+    # in the JAVA code --> configure to account for these control modes coming in 
+    C2 = [0.0, 0.0, 0.0, MODES[1], 0.0, 0.0, 0.0, MODES[1]]
+
+
 
 
 
