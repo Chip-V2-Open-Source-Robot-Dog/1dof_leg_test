@@ -17,6 +17,7 @@ public class Networking {
     final NetworkTable inputTable = networkTableInstance.getTable("rio_input");
     
     private Networking() {
+        networkTableInstance.setUpdateRate(0.01);
         readoutEntries = new HashMap<String, NetworkTableEntry>();
         inputEntries = new HashMap<String, NetworkTableEntry>();
     }
