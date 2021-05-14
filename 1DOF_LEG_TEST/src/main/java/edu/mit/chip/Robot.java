@@ -150,9 +150,10 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void teleopInit() {
-        //SET ALL THE LEGS TO ZERO POSITION 
-        motor_1.getPIDController().setReference(0.0, MotorControlType.POSITION.sparkMaxType);
-        motor_2.getPIDController().setReference(0.0, MotorControlType.POSITION.sparkMaxType);
+        //SET THE FIRST MOTOR TO A DESIRED VELOCITY
+        motor_1.getPIDController().setReference(networking.pullInput("m1_pd", 0.0), MotorControlType.VELOCITY.sparkMaxType);
+        //VERY SIMPLE TORQUE CONTROLLER FOR THE SECOND MOTOR
+        motor_2.getPIDController().setReference(networking.pullInput("m2_tau", 0.0), MotorControlType.CURRENT.sparkMaxType); //DIVIDE BY KT after INITIAL TESTS
     }
     
     /**
