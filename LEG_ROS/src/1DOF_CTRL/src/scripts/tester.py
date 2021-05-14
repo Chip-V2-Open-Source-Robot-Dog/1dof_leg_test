@@ -32,6 +32,7 @@ SOME INITIALIZATION CODE
 '''
 #start network tables server
 nt.initialize(server=DEFAULTS.RIO_IP)
+nt.setUpdateRate(0.01)
 #initialize tables
 sender=nt.getTable("rio_input")
 readout=nt.getTable("rio_readout")
@@ -72,8 +73,6 @@ def read(data):
 #run the main code
 if __name__=='__main__':
     pass
-
-
 
 
 
