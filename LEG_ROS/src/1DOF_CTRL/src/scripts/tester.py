@@ -75,6 +75,7 @@ def read():
 
 #run the main code
 if __name__=='__main__':
+    print("STARTING CONTROLLER...")
     #SET THE COMMANDED VEL
     COMMANDED_VELOCITY = 10.0 #RPM
     #SET THE COMMANDED TORQUE (CURRENT FOR NOW)
@@ -85,16 +86,19 @@ if __name__=='__main__':
     C2 = [0.0, 0.0, 0.0, MODES['VOL'], 0.0, 0.0, 0.0, MODES['VOL']]
 
     #MAIN LOOP
+    print("EXPERIMENT RUNNING...")
     DURATION = 2.0 #seconds
     ti = time.time()
     while (time.time()-ti) <= DURATION:
         write(C1)
-        read()
+        #print(read())
 
+    print("DISABLING MOTORS...")
     ti = time.time()
     while (time.time()-ti) <= DURATION:
         write(C2)
-        read()
+        #print(read())
+    print("DONE! PLEASE CHECK CSV FILE!")
 
 
 
