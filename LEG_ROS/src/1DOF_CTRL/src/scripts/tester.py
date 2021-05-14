@@ -40,7 +40,7 @@ readout=nt.getTable("rio_readout")
 '''
 SETUP MODES DICT
 '''
-MODES = {1: 'VOL', 2: 'CUR', 3: 'VEL', 4: 'POS'}
+MODES = {'VOL': 1.0, 'CUR': 2.0, 'VEL': 3.0, 'POS': 4.0}
 M1_DATA = [DEFAULTS.NT_DEFAULT_VAL]*4
 M2_DATA = [DEFAULTS.NT_DEFAULT_VAL]*4
 VBUS = DEFAULTS.NT_DEFAULT_VAL
@@ -57,7 +57,7 @@ def write(command):
     sender.putNumber("m2_tau", command[6])
     sender.putNumber("m2_mode", command[7])
 
-def read(data):
+def read():
     #data from M1
     M1_DATA = [readout.getNumber("m1_p", DEFAULTS.NT_DEFAULT_VAL), readout.getNumber("m1_v", DEFAULTS.NT_DEFAULT_VAL), readout.getNumber("m1_tau", DEFAULTS.NT_DEFAULT_VAL), readout.getNumber("m1_current", DEFAULTS.NT_DEFAULT_VAL)]
     #data from M2
@@ -70,6 +70,9 @@ def read(data):
     DATA_VECTOR = [t]+[VBUS]+M1_DATA+M2_DATA
     writer.writerow(DATA_VECTOR)
 
+    #return the vector
+    return DATA_VECTOR
+
 #run the main code
 if __name__=='__main__':
     #SET THE COMMANDED VEL
@@ -77,9 +80,22 @@ if __name__=='__main__':
     #SET THE COMMANDED TORQUE (CURRENT FOR NOW)
     COMMANDED_TORQUE = 1.0 #A for now (will do Nm later)
     #COMMANDS
-    C1 = [0.0, COMMANDED_VELOCITY, MODES[3], 0.0, 0.0, 0.0, COMMANDED_TORQUE, MODES[2]]
+    C1 = [0.0, COMMANDED_VELOCITY, MODES['VEL'], 0.0, 0.0, 0.0, COMMANDED_TORQUE, MODES['CUR']]
     # in the JAVA code --> configure to account for these control modes coming in 
-    C2 = [0.0, 0.0, 0.0, MODES[1], 0.0, 0.0, 0.0, MODES[1]]
+    C2 = [0.0, 0.0, 0.0, MODES['VOL'], 0.0, 0.0, 0.0, MODES['VOL']]
+
+    #MAIN LOOP
+    DURATION = 2.0 #seconds
+    ti = time.time()
+    while (time.time()-ti) <= DURATION:
+        write(C1)
+        read()
+
+    ti = time.time()
+    while (time.time()-ti) <= DURATION:
+        write(C2)
+        read()
+
 
 
 
