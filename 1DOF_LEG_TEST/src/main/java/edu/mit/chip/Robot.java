@@ -76,6 +76,10 @@ public class Robot extends TimedRobot {
         motor_1 =  new CANSparkMax(3, MotorType.kBrushless);
         motor_2 =     new CANSparkMax(10, MotorType.kBrushless);
 
+        //enable voltage compensation --> sets motors to 24V
+        //motor_1.enableVoltageCompensation(24.0);
+        //motor_2.enableVoltageCompensation(24.0);
+
         System.out.println("Controllers constructed.");
 
         //CREATE PID CONSTANTS OBJECT
@@ -150,8 +154,29 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void teleopInit() {
+        //SET THE VALUES TO WHAT IS PULLED FROM NETWORK TABLES --> POSITION + SMART MOTION CONTROL!!!
+        motor_1.getPIDController().setReference(networking.pullInput("m1_p", 0.0), MotorControlType.POSITION.sparkMaxType); //UPDATE THE MOTOR CONTROL STRUCT ABOVE LATER
+        motor_2.getPIDController().setReference(networking.pullInput("m2_p", 0.0), MotorControlType.POSITION.sparkMaxType);
+    }
+    
+    /**
+    * This function is called periodically during teleoperated period.
+    */
+    @Override
+    public void teleopPeriodic() {
+
+        //=====================================================//
+        //                                                     //
+        //                SET ALL JOINT SETPOINTS              //
+        //                                                     //
+        //=====================================================//
+
+        //NOTE:
+        /*
+        WILL NEED TO IMPLEMENT CURRENT LIMITS SO WE DON'T FRY THE MOTOR SINCE WE ARE NOW OPERATING @ 24V!!!
+        */
         //PULL THE CONTROL MODES FOR EACH MOTOR
-        double m1_mode = networking.pullInput("m1_mode", 1.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
+        double m1_mode = networking.pullInput("m1_mode", 4.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
         double m2_mode = networking.pullInput("m2_mode", 1.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
 
         //now parse the nt inputs for MOTOR 1
@@ -189,29 +214,6 @@ public class Robot extends TimedRobot {
             //SET THE FIRST MOTOR TO A DESIRED POSITION
             motor_2.getPIDController().setReference(networking.pullInput("m2_p", 0.0), MotorControlType.POSITION.sparkMaxType);
         }
-    }
-    
-    /**
-    * This function is called periodically during teleoperated period.
-    */
-    @Override
-    public void teleopPeriodic() {
-
-        //=====================================================//
-        //                                                     //
-        //                SET ALL JOINT SETPOINTS              //
-        //                                                     //
-        //=====================================================//
-
-        //NOTE:
-        /*
-        WILL NEED TO IMPLEMENT CURRENT LIMITS SO WE DON'T FRY THE MOTOR SINCE WE ARE NOW OPERATING @ 24V!!!
-        */
-
-
-        //SET THE VALUES TO WHAT IS PULLED FROM NETWORK TABLES --> POSITION + SMART MOTION CONTROL!!!
-        motor_1.getPIDController().setReference(networking.pullInput("m1_p", 0.0), MotorControlType.POSITION.sparkMaxType); //UPDATE THE MOTOR CONTROL STRUCT ABOVE LATER
-        motor_2.getPIDController().setReference(networking.pullInput("m2_p", 0.0), MotorControlType.POSITION.sparkMaxType);
     }
     
     /**
