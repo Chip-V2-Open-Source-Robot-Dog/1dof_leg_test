@@ -154,8 +154,8 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void teleopInit() {
-        //SET THE VALUES TO WHAT IS PULLED FROM NETWORK TABLES --> POSITION + SMART MOTION CONTROL!!!
-        motor_1.getPIDController().setReference(networking.pullInput("m1_p", 0.0), MotorControlType.POSITION.sparkMaxType); //UPDATE THE MOTOR CONTROL STRUCT ABOVE LATER
+        //SET EVERYTHING TO ZERO ON INIT
+        motor_1.getPIDController().setReference(networking.pullInput("m1_p", 0.0), MotorControlType.POSITION.sparkMaxType);
         motor_2.getPIDController().setReference(networking.pullInput("m2_p", 0.0), MotorControlType.POSITION.sparkMaxType);
     }
     
