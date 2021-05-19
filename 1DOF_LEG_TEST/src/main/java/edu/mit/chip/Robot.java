@@ -176,7 +176,7 @@ public class Robot extends TimedRobot {
         WILL NEED TO IMPLEMENT CURRENT LIMITS SO WE DON'T FRY THE MOTOR SINCE WE ARE NOW OPERATING @ 24V!!!
         */
         //PULL THE CONTROL MODES FOR EACH MOTOR
-        double m1_mode = networking.pullInput("m1_mode", 4.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
+        double m1_mode = networking.pullInput("m1_mode", 1.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
         double m2_mode = networking.pullInput("m2_mode", 1.0); //1.0 --> VOL, 2.0 --> CUR, 3.0 --> VEL, 4.0 --> POS
 
         //now parse the nt inputs for MOTOR 1
