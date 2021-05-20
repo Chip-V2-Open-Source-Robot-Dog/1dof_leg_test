@@ -51,11 +51,11 @@ public class Robot extends TimedRobot {
     private final double kFF = 0;
     private final double maxRPM = 5700;
     //SHOULDER CONSTANTS
-    private final double kP = 0.2;
-    private final double kI = 0.00001;
-    private final double kD = 0.4;
-    private final double kMaxOutput = 0.14;
-    private final double kMinOutput = -0.14;
+    private final double kP = 0.05;
+    private final double kI = 0.0;
+    private final double kD = 0.0;
+    private final double kMaxOutput = 1;
+    private final double kMinOutput = -1;
 
     private Networking networking;
     // private Thread networkingThread;
@@ -84,8 +84,9 @@ public class Robot extends TimedRobot {
 
         //CREATE PID CONSTANTS OBJECT
         PIDConstants motorPID = new PIDConstants(kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM);
+        PIDConstants positionPID = new PIDConstants(0.5, 0.0, 0.001, 0.0, 0.0, 1.0, -1.0, maxRPM);
         //actually set the PID constants
-        motorPID.load(motor_1.getPIDController());
+        positionPID.load(motor_1.getPIDController());
         motorPID.load(motor_2.getPIDController());
 
         //=====================================================//
@@ -155,7 +156,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         //SET EVERYTHING TO ZERO ON INIT
-        motor_1.getPIDController().setReference(networking.pullInput("m1_p", 0.0), MotorControlType.POSITION.sparkMaxType);
+        motor_1.getPIDController().setReference(networking.pullInput("m1_p", 4.0), MotorControlType.POSITION.sparkMaxType);
         motor_2.getPIDController().setReference(networking.pullInput("m2_p", 0.0), MotorControlType.POSITION.sparkMaxType);
     }
     
@@ -200,7 +201,7 @@ public class Robot extends TimedRobot {
         //now parse the nt inputs for MOTOR 2
         if (m2_mode == 1.0) {
             //SET THE FIRST MOTOR TO A DESIRED VOLTAGE, ONLY TO STOP THE MOTOR
-            motor_2.getPIDController().setReference(0.0, MotorControlType.VOLTAGE.sparkMaxType);
+            motor_2.getPIDController().setReference(networking.pullInput("m2_tau", 0.0), MotorControlType.VOLTAGE.sparkMaxType);
         }
         if (m2_mode == 2.0) {
             //SET THE FIRST MOTOR TO A DESIRED CURRENT
