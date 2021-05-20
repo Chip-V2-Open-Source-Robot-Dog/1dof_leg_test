@@ -20,9 +20,8 @@ full_path = os.path.join(script_dir, filename)
 csv_file = open(full_path, mode='w')
 #setup the CSV file
 fieldnames = ["t", "VBUS",
-            "m1_p", "m2_p", "m1_current", "m2_current", 
-            "m1_v", "m2_v",
-            "m1_tau", "m2_tau"]
+            "m1_p", "m1_v", "m1_tau", "m1_current", 
+            "m2_p", "m2_v", "m2_tau", "m2_current"]
 writer = csv.writer(csv_file)
 writer.writerow(fieldnames)
 t0 = time.time()
@@ -77,27 +76,31 @@ def read():
 if __name__=='__main__':
     print("STARTING CONTROLLER...")
     #SET THE COMMANDED VEL
-    COMMANDED_VELOCITY = 10.0 #RPM
+    COMMANDED_POS = 0.0 #RPM
+    
+    #NOTE: FOR RPMS > 0V, WE SHOULD ADD SOME SPIN-UP TIME BEFORE APPLYING A TORQUE
+
     #SET THE COMMANDED TORQUE (CURRENT FOR NOW)
-    COMMANDED_TORQUE = 1.0 #A for now (will do Nm later)
+    COMMANDED_TORQUE = 3.0 #A for now (will do Nm later)
     #COMMANDS
-    C1 = [0.0, COMMANDED_VELOCITY, MODES['VEL'], 0.0, 0.0, 0.0, COMMANDED_TORQUE, MODES['CUR']]
+    C1 = [0.0, 0.0, 0.0, MODES['VOL'], 0.0, 0.0, COMMANDED_TORQUE, MODES['VOL']]
     # in the JAVA code --> configure to account for these control modes coming in 
     C2 = [0.0, 0.0, 0.0, MODES['VOL'], 0.0, 0.0, 0.0, MODES['VOL']]
 
     #MAIN LOOP
     print("EXPERIMENT RUNNING...")
-    DURATION = 2.0 #seconds
+    DURATION = 5.0 #seconds
     ti = time.time()
     while (time.time()-ti) <= DURATION:
         write(C1)
-        #print(read())
+        print(read())
 
+    DURATION = 1.0 #seconds
     print("DISABLING MOTORS...")
     ti = time.time()
     while (time.time()-ti) <= DURATION:
         write(C2)
-        #print(read())
+        print(read())
     print("DONE! PLEASE CHECK CSV FILE!")
 
 
